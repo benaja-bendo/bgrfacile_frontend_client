@@ -11,7 +11,7 @@
       </div>
       <div class="hidden md:flex justify-around space-x-4">
         <a
-          href="#"
+          [routerLink]="['']"
           class="hover:text-indigo-600 text-gray-700 flex justify-center items-center"
         >
           <svg
@@ -28,10 +28,10 @@
               d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
             />
           </svg>
-          <span>Course</span>
+          <span>Accueil</span>
         </a>
         <a
-          href="#"
+          [routerLink]="['']"
           class="hover:text-indigo-600 text-gray-700 flex justify-center items-center"
         >
           <svg
@@ -48,10 +48,10 @@
               d="M4.871 4A17.926 17.926 0 003 12c0 2.874.673 5.59 1.871 8m14.13 0a17.926 17.926 0 001.87-8c0-2.874-.673-5.59-1.87-8M9 9h1.246a1 1 0 01.961.725l1.586 5.55a1 1 0 00.961.725H15m1-7h-.08a2 2 0 00-1.519.698L9.6 15.302A2 2 0 018.08 16H8"
             />
           </svg>
-          <span>Exercices</span>
+          <span>Nos écoles</span>
         </a>
         <a
-          href="#"
+          [routerLink]="['']"
           class="hover:text-indigo-600 text-gray-700 flex justify-center items-center"
         >
           <svg
@@ -72,10 +72,10 @@
               d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
             />
           </svg>
-          <span>Formations</span>
+          <span>Prix</span>
         </a>
         <a
-          href="#"
+          [routerLink]="['bibliotheque']"
           class="hover:text-indigo-600 text-gray-700 flex justify-center items-center"
         >
           <svg
@@ -94,17 +94,17 @@
               d="M16 4L3 7v2l13-3l13 3V7zm-6 6c-3.227 0-6.375 1.313-6.375 1.313l-.625.28V27h11.281c.348.598.98 1 1.719 1c.738 0 1.371-.402 1.719-1H29V11.594l-.625-.281S25.227 10 22 10c-2.918 0-5.48.98-6 1.188C15.48 10.98 12.918 10 10 10zm0 2c1.934 0 4 .625 5 .969v11.125c-1.113-.367-2.941-.875-5-.875c-2.102 0-3.813.484-5 .875V12.969C5.77 12.69 7.8 12 10 12zm12 0c2.2 0 4.23.691 5 .969v11.125c-1.188-.39-2.898-.875-5-.875c-2.059 0-3.887.508-5 .875V12.969c1-.344 3.066-.969 5-.969z"
             ></path>
           </svg>
-          <span>Ecole en ligne</span>
+          <span>Bibliotheque</span>
         </a>
       </div>
     </div>
     <div class="flex space-x-4 items-center">
-      <a href="#" class="hidden sm:block text-gray-800 text-sm">Connexion</a>
       <a
-        href="#"
+        [routerLink]="['login']" class="hidden sm:block text-gray-800 text-sm">Connexion</a>
+      <a
+        [routerLink]="['register']"
         class="hidden sm:block bg-indigo-600 px-4 py-2 rounded text-white hover:bg-indigo-500 text-sm"
-      >Inscription</a
-      >
+      >Inscription</a>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -126,107 +126,4 @@
     </div>
   </div>
 </nav>
-
-<div class="flex h-screen antialiased text-gray-900 bg-gray-100">
-  <div *ngIf="courses.length==0"
-    class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-black"
-  >
-    Loading.....
-  </div>
-
-  <aside class="fixed inset-y-0 z-10 flex flex-shrink-0 overflow-hidden bg-white border-r lg:static focus:outline-none">
-    <nav
-      aria-label="Main"
-      class="flex-1 w-64 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
-
-      <mat-expansion-panel  *ngFor="let cycle of cycles">
-
-        <mat-expansion-panel-header >
-          <mat-panel-title>
-            <span class="mr-1" aria-hidden="true">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                aria-hidden="true"
-                role="img"
-                class="iconify iconify--map w-5 h-5"
-                width="32"
-                height="32"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 50 50"
-              >
-                <path
-                  fill="currentColor"
-                  d="M30 8v33H6V8h24m4-4H2v42h32V4zM9 12h18v4H9zm0 7h18v4H9zm0 7h18v4H9zm0 7h18v4H9zm31-21h8v28h-8zm4.006-11C41.812 1 40 2.765 40 4.937V9h8V4.937C48 2.765 46.191 1 44.006 1zm-4.068 42l4.041 6.387L48 43z"
-                ></path>
-              </svg>
-            </span>
-            <span>{{cycle.name}} </span>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <mat-expansion-panel *ngFor="let level of cycle.levels">
-          <mat-expansion-panel-header>
-            <mat-panel-title> {{level.name}} </mat-panel-title>
-          </mat-expansion-panel-header>
-          <a *ngFor="let matiere of level.matieres" class="" (click)="onClickMatiere()"> {{matiere.name}}</a>
-        </mat-expansion-panel>
-
-      </mat-expansion-panel>
-
-    </nav>
-  </aside>
-
-  <main class="flex-1 p-1">
-    <div class="overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-28">
-      <app-card-course *ngFor="let course of courses
-      | paginate: { itemsPerPage: 9, currentPage: p }"
-                       [course]="course"></app-card-course>
-
-    </div>
-
-    <div class="w-full flex justify-center items-center my-2" *ngIf="courses.length!=0">
-      <pagination-controls (pageChange)="p = $event" ></pagination-controls>
-    </div>
-  </main>
-</div>
-
-<!--
-<div class="h-screen bg-gray-100 flex justify-center">
-  <div class="py-6 px-8 h-80 mt-20 bg-white rounded shadow-xl">
-    <form action="">
-      <div class="mb-6">
-        <label for="name" class="block text-gray-800 font-bold">Name:</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="username"
-          class="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
-        />
-      </div>
-
-      <div>
-        <label for="email" class="block text-gray-800 font-bold">Email:</label>
-        <input
-          type="text"
-          name="email"
-          id="email"
-          placeholder="@email"
-          class="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
-        />
-
-        <a
-          href="#"
-          class="text-sm font-thin text-gray-800 hover:underline mt-2 inline-block hover:text-indigo-600"
-          >Forget Password</a
-        >
-      </div>
-      <button
-        class="cursor-pointer py-2 px-4 block mt-6 bg-indigo-500 text-white font-bold w-full text-center rounded"
-      >
-        Login
-      </button>
-    </form>
-  </div>
-</div> -->
+<router-outlet></router-outlet>

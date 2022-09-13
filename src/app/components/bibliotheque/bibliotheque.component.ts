@@ -1,17 +1,17 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CourseService} from "../../services/course.service";
+import { Component, OnInit } from '@angular/core';
 import {Course} from "../../models/course";
-import {Observable, Subscription} from "rxjs";
-import {CycleService} from "../../services/cycle.service";
 import {Cycle} from "../../models/cycle";
+import {Subscription} from "rxjs";
+import {CourseService} from "../../services/course.service";
+import {CycleService} from "../../services/cycle.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-bibliotheque',
+  templateUrl: './bibliotheque.component.html',
+  styleUrls: ['./bibliotheque.component.css']
 })
-export class HomeComponent implements OnInit , OnDestroy{
+export class BibliothequeComponent implements OnInit {
 
   courses:Array<Course> = new Array<Course>();
   cycles:Array<Cycle> = new Array<Cycle>();
@@ -60,4 +60,5 @@ export class HomeComponent implements OnInit , OnDestroy{
       queryParamsHandling: 'preserve', // remove to replace all query params by provided
     }).then(r => console.log(r))
   }
+
 }

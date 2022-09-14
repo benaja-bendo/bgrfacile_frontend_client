@@ -1,1 +1,46 @@
-<p>register works!</p>
+<section class="h-full w-full flex flex-col justify-center items-center">
+
+  <form class="w-1/2 flex flex-col space-y-6 px-9 " [formGroup]="registerForm" (ngSubmit)="goToHome()">
+
+    <p-messages></p-messages>
+
+    <div class="flex flex-col space-y-2">
+      <p class="w-full text-3xl font-bold text-left ">Inscrivez-vous</p>
+      <p>Vous avez déjà un compte ? <a [routerLink]="['/login']" class="text-indigo-400">Connectez-vous ici</a></p>
+    </div>
+
+    <span class="w-full p-float-label p-input-icon-left p-input-icon-right ">
+      <i class="pi pi-user"></i>
+      <i class="pi pi-times-circle cursor-pointer" *ngIf="registerForm.value.name" (click)="onCleanEmailField(name)"></i>
+      <input class="w-full" id="name" #name [ngClass]="getClass(name)" type="text" pInputText formControlName="name">
+      <label for="name">username</label>
+    </span>
+
+    <span class="w-full p-float-label p-input-icon-left p-input-icon-right ">
+      <i class="pi pi-envelope"></i>
+      <i class="pi pi-times-circle cursor-pointer" *ngIf="registerForm.value.email" (click)="onCleanEmailField(email)"></i>
+      <input class="w-full" id="email"  #email  [ngClass]="getClass(email)" type="email" pInputText formControlName="email">
+      <label for="email">email</label>
+    </span>
+
+    <span class="p-float-label p-input-icon-left p-input-icon-right w-full">
+      <i class="pi pi-lock"></i>
+      <i class="pi pi-eye-slash cursor-pointer" *ngIf="hide" (click)="displayPassword()"></i>
+      <i class="pi pi-eye cursor-pointer" *ngIf="!hide" (click)="displayPassword()"></i>
+      <input class="w-full" id="password"  #password [ngClass]="getClass(password)" [type]="hide?'password':'text'" pInputText formControlName="password">
+      <label for="password">password</label>
+    </span>
+
+    <span class="p-float-label p-input-icon-left p-input-icon-right w-full">
+      <i class="pi pi-lock"></i>
+      <i class="pi pi-eye-slash cursor-pointer" *ngIf="hide" (click)="displayPassword()"></i>
+      <i class="pi pi-eye cursor-pointer" *ngIf="!hide" (click)="displayPassword()"></i>
+      <input class="w-full" id="confirmPassword"  #confirmPassword [ngClass]="getClass(confirmPassword)" [type]="hide?'password':'text'" pInputText formControlName="confirmPassword">
+      <label for="confirmPassword">password confirm</label>
+    </span>
+
+    <button class="w-full mx-auto" pButton label="S'inscrire"></button>
+
+  </form>
+
+</section>

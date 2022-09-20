@@ -11,14 +11,14 @@ const routes: Routes = [
   {path:'',redirectTo:'/',pathMatch:'full'},
   {path:'',component:HomeComponent,
     children:[
-      {path:'bibliotheque',component:BibliothequeComponent},
-      {path:'profile',component:ProfileComponent},
+      {path:'bibliotheque',title:'library',component:BibliothequeComponent},
+      {path:':username',title:'profile',component:ProfileComponent},
       {path:'**',redirectTo:'404'}
     ]
   },
-  {path:'login',component:LoginComponent},
-  {path:'register',component:RegisterComponent},
-  {path:'404',component:NotfoundComponent},
+  {path:'login',title:'login',component:LoginComponent},
+  {path:'register',title:'register',component:RegisterComponent},
+  {path:'404',title:'not found page',component:NotfoundComponent},
   {path:'**',redirectTo:'404'}
 ];
 

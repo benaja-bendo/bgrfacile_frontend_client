@@ -1,0 +1,53 @@
+<form class="w-full flex flex-wrap space-y-6" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+  <p-messages></p-messages>
+
+  <span class="mx-auto">
+    <i class="pi pi-user mr-2"></i>
+    <input class="rounded-md border px-1 py-2" id="username" placeholder="username" #username [ngClass]="getClass(username)" type="text" pInputText
+           formControlName="username">
+  </span>
+
+  <span class="mx-auto">
+    <i class="pi pi-user mr-2"></i>
+    <input class="rounded-md border px-1 py-2" id="firstname" placeholder="firstname" #firstname [ngClass]="getClass(firstname)" type="text" pInputText
+             formControlName="firstname">
+  </span>
+
+  <span class="mx-auto">
+    <i class="pi pi-user mr-2"></i>
+    <input class="rounded-md border px-1 py-2" id="lastname" placeholder="lastname" #lastname [ngClass]="getClass(lastname)" type="text" pInputText
+             formControlName="lastname">
+  </span>
+
+  <span class="mx-auto">
+    <i class="pi pi-user mr-2"></i>
+    <input class="rounded-md border px-1 py-2" id="genre" placeholder="genre" #genre [ngClass]="getClass(genre)" type="text" pInputText
+             formControlName="genre">
+  </span>
+
+  <span class="mx-auto">
+    <i class="pi pi-phone mr-2"></i>
+    <input class="rounded-md border px-1 py-2" id="phone" placeholder="phone" #phone [ngClass]="getClass(phone)" type="text" pInputText
+             formControlName="phone">
+  </span>
+
+  <span class="mx-auto">
+    <i class="pi pi-map-marker mr-2"></i>
+    <input class="rounded-md border px-1 py-2" id="address" placeholder="address" #address [ngClass]="getClass(address)" type="text" pInputText
+             formControlName="address">
+  </span>
+
+  <span class="mx-auto">
+      <i class="pi pi-envelope mr-2"></i>
+      <input class="rounded-md border px-1 py-2" id="email" placeholder="email" #email [ngClass]="getClass(email)" type="email" pInputText
+             formControlName="email">
+    </span>
+
+  <div class="w-full flex space-x-2 flex-wrap">
+    <button class="p-button-raised p-button-success p-button-text" pButton label="Modifier"></button>
+    <button class="p-button-outlined p-button-danger" pButton label="Annuler"></button>
+  </div>
+  <br/>
+
+</form>

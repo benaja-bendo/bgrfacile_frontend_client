@@ -24,6 +24,13 @@ import {MessagesModule} from "primeng/messages";
 import {MessageService} from "primeng/api";
 import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
 import {CheckboxModule} from "primeng/checkbox";
+import {SplitterModule} from "primeng/splitter";
+import {TabViewModule} from "primeng/tabview";
+import {ImageModule} from "primeng/image";
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import {ScrollTopModule} from "primeng/scrolltop";
+import {ScrollPanelModule} from "primeng/scrollpanel";
+import {RippleModule} from "primeng/ripple";
 
 @NgModule({
   declarations: [
@@ -35,7 +42,8 @@ import {CheckboxModule} from "primeng/checkbox";
     BibliothequeComponent,
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +59,13 @@ import {CheckboxModule} from "primeng/checkbox";
     ButtonModule,
     MessagesModule,
     TriStateCheckboxModule,
-    CheckboxModule
+    CheckboxModule,
+    SplitterModule,
+    TabViewModule,
+    ImageModule,
+    ScrollTopModule,
+    ScrollPanelModule,
+    RippleModule
   ],
   providers: [
     {

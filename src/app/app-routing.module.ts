@@ -12,7 +12,7 @@ const routes: Routes = [
   {path:'',component:HomeComponent,
     children:[
       {path:'bibliotheque',title:'library',component:BibliothequeComponent},
-      {path:':username',title:'profile',component:ProfileComponent},
+      {path:'profile/:username',title:'profile',component:ProfileComponent},
       {path:'**',redirectTo:'404'}
     ]
   },

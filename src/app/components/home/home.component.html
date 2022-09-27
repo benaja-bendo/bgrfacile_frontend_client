@@ -105,25 +105,10 @@
         [routerLink]="['register']"
         class="hidden sm:block bg-indigo-600 px-4 py-2 rounded text-white hover:bg-indigo-500 text-sm"
       >Inscription</a>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        aria-hidden="true"
-        role="img"
-        class="iconify iconify--radix-icons md:hidden"
-        width="32"
-        height="32"
-        preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 15 15"
-      >
-        <path
-          fill="currentColor"
-          fill-rule="evenodd"
-          d="M1.5 3a.5.5 0 0 0 0 1h12a.5.5 0 0 0 0-1h-12ZM1 7.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Zm0 4a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Z"
-          clip-rule="evenodd"
-        ></path>
-      </svg>
+      <p-avatar image="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Round&hairColor=Red&facialHairType=BeardMedium&facialHairColor=BrownDark&clotheType=GraphicShirt&clotheColor=Heather&graphicType=Skull&eyeType=Squint&eyebrowType=UpDown&mouthType=Disbelief&skinColor=Yellow"
+                styleClass="mr-2 cursor-pointer" shape="circle" (click)="menu.toggle($event)"></p-avatar>
     </div>
   </div>
 </nav>
+<p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
 <router-outlet></router-outlet>

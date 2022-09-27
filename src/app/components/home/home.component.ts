@@ -5,6 +5,7 @@ import {Observable, Subscription} from "rxjs";
 import {CycleService} from "../../services/cycle.service";
 import {Cycle} from "../../models/cycle";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,8 @@ export class HomeComponent implements OnInit , OnDestroy{
   cycleSubscription:Subscription = new Subscription()
   p: number = 1;
 
+  items: MenuItem[] = [];
+
   constructor(
     private courseService:CourseService,
     private cycleService:CycleService,
@@ -28,6 +31,7 @@ export class HomeComponent implements OnInit , OnDestroy{
   ngOnInit(): void {
     this.getCourse();
     this.getCycle();
+    this.dataInit()
   }
 
   getCourse():void{
@@ -59,5 +63,25 @@ export class HomeComponent implements OnInit , OnDestroy{
       },
       queryParamsHandling: 'preserve', // remove to replace all query params by provided
     }).then(r => console.log(r))
+  }
+  dataInit(){
+    this.items = [
+      {
+        label: 'Mon profile',
+        icon: 'pi pi-fw pi-user',
+        routerLink:'profile/styveLioumba',
+      },
+      {
+        label:'Parametres',
+        icon:'pi pi-fw pi-cog',
+        routerLink:'parametres'
+      },
+      {separator: true},
+      {
+        label: 'Se Déconnecter',
+        icon: 'pi pi-fw pi-power-off',
+        routerLink:'/'
+      }
+    ]
   }
 }

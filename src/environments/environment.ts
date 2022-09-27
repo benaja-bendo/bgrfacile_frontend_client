@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api_gateway: {
-    baseRoot_v1:"https://bgrfacile.com/api/v1"
+    baseRoot_v1:"http://127.0.0.1:8000/api/v1"
   }
 };
 

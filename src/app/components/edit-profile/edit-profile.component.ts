@@ -8,12 +8,6 @@ import {FormBuilder, FormControl, Validators} from "@angular/forms";
 })
 export class EditProfileComponent implements OnInit {
 
-  @Input()
-  isVisible:boolean = false
-
-  @Output()
-  stateOfEditComponent : EventEmitter<boolean> = new EventEmitter<boolean>()
-
   editForm:any
   hide: boolean = true;
 
@@ -35,7 +29,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this.stateOfEditComponent.emit(false);
   }
 
   displayPassword() {

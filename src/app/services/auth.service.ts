@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {User} from "../models/course";
 import {catchError, map, Observable, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
+import {setLogin} from "../store/actions/login-page.actions";
+import {Store} from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
@@ -15,23 +17,30 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router) {}
+    private router: Router,
+    private store: Store) {}
 
 
-  signUp(user: User): Observable<any> {
-    let api = `${this.endpoint}/register-user`;
+  signUp(user: any): Observable<any> {
+    let api = `${this.endpoint}/register`;
     return this.http.post(api, user).pipe(catchError(this.handleError));
   }
 
-  signIn(user: User) {
+  signIn(user: any) {
     return this.http
-      .post<any>(`${this.endpoint}/signin`, user)
+      .post<any>(`${this.endpoint}/login`, user)
       .subscribe((res: any) => {
+        console.log(res);
         localStorage.setItem('access_token', res.token);
         localStorage.setItem('user', JSON.stringify({"remember":false}));
+
+        const emailWithOutDomain = (user.username).substring(0, user.username.indexOf("@"))
+
+        this.store.dispatch(setLogin(user));
+
         this.getUserProfile(res._id).subscribe((res) => {
           this.currentUser = res;
-          this.router.navigate(['profile']).then(r => {});
+          this.router.navigate([`profile/${emailWithOutDomain}`]).then(r => {});
         });
       });
   }

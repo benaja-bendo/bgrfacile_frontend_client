@@ -8,7 +8,6 @@ import { LogoComponent } from './components-models/logo/logo.component';
 import { CardCourseComponent } from './components-models/card-course/card-course.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {CoursModule} from "./modules/cours/cours.module";
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { HomeComponent } from './components/home/home.component';
 import {NgxPaginationModule} from "ngx-pagination";
@@ -31,6 +30,13 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import {ScrollTopModule} from "primeng/scrolltop";
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import {RippleModule} from "primeng/ripple";
+import {DropdownModule} from "primeng/dropdown";
+import {AvatarModule} from "primeng/avatar";
+import {TieredMenuModule} from "primeng/tieredmenu";
+import { StoreModule } from '@ngrx/store';
+import {loginReducer} from "./store/reducers/login.reducer";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -51,7 +57,6 @@ import {RippleModule} from "primeng/ripple";
     AppRoutingModule,
     BrowserAnimationsModule,
     MatExpansionModule,
-    CoursModule,
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
@@ -65,7 +70,12 @@ import {RippleModule} from "primeng/ripple";
     ImageModule,
     ScrollTopModule,
     ScrollPanelModule,
-    RippleModule
+    RippleModule,
+    DropdownModule,
+    AvatarModule,
+    TieredMenuModule,
+    StoreModule.forRoot({login:loginReducer}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
     {

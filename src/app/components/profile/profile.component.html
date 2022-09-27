@@ -1,38 +1,32 @@
 <section class="card w-screen h-screen overflow-hidden">
-  <p-splitter styleClass="h-screen" [panelSizes]="[30,70]" layout="horizontal">
+  <p-splitter styleClass="h-screen" [panelSizes]="[25,75]" layout="horizontal">
     <ng-template pTemplate>
-      <div class="w-full flex flex-col overflow-y-auto space-y-5">
-        <img src="https://picsum.photos/200" alt="Image" width="250" class="border-2 rounded-full mx-auto "/>
+      <div class="w-full flex flex-col overflow-y-auto space-y-5 py-5 px-3">
+        <img src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Round&hairColor=Red&facialHairType=BeardMedium&facialHairColor=BrownDark&clotheType=GraphicShirt&clotheColor=Heather&graphicType=Skull&eyeType=Squint&eyebrowType=UpDown&mouthType=Disbelief&skinColor=Yellow" alt="Image" width="250" class="border-2 rounded-full mx-auto "/>
 
-        <div class="flex flex-col mx-auto space-y-2" *ngIf="!isVisible">
+        <div class="flex flex-col mx-auto space-y-2">
           <span><i class="pi pi-user mr-2"></i>Styve LIOUMBA</span>
           <span><i class="pi pi-envelope mr-2"></i>styvelioumba98@gmail.com</span>
 
-          <button pButton pRipple type="button" label="Edit profile" class="p-button-outlined" (click)="onShowEditForm()"></button>
+          <button  class="transition duration-700 ease-in-out rounded-md py-1 px-1 text-center  bg-indigo-400 text-white outline-indigo-400  outline-1 outline-offset-1 hover:outline hover:bg-transparent hover:text-indigo-500" (click)="onShowEditForm()">Edit profile</button>
         </div>
 
-        <app-edit-profile *ngIf="isVisible" [isVisible]="isVisible" (stateOfEditComponent)="onChangeEditComponentState($event)"></app-edit-profile>
       </div>
     </ng-template>
     <ng-template pTemplate>
-      <div class="flex flex-col">
+      <div class="flex flex-col w-full">
         <p-tabView>
-          <p-tabPanel header="Header I" leftIcon="pi pi-calendar" tooltip="1972">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-              voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum.</p>
+          <p-tabPanel header="Mes informations personnelles" leftIcon="pi pi-user" tooltip="Moi">
+            <app-edit-profile></app-edit-profile>
           </p-tabPanel>
-          <p-tabPanel header="Header II" rightIcon="pi pi-inbox" tooltip="1974">
+          <p-tabPanel header="Cours" rightIcon="pi pi-inbox" tooltip="Mes cours">
             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
               rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
               architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
               odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
               voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
           </p-tabPanel>
-          <p-tabPanel header="Header III" leftIcon="pi pi-user" rightIcon="pi pi-star-fill" tooltip="1990">
+          <p-tabPanel header="Ecole" leftIcon="pi pi-briefcase" rightIcon="pi pi-star-fill" tooltip="Mes écoles">
             <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
               atque corrupti quos dolores et quas molestias excepturi sint occaecati
               cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et

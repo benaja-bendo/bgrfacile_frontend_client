@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {Cycle} from "../models/cycle";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class CycleService {
 
   constructor(private httpClient: HttpClient) { }
 
-  get cycles():Observable<Array<Cycle>>{
-    return this.httpClient.get<Array<Cycle>>(this.baseRoot)
+  get cycles():Observable<any>{
+    return this.httpClient.get<any>(this.baseRoot)
   }
 }

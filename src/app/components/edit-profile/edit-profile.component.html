@@ -1,0 +1,46 @@
+<section class="flex ">
+
+  <form class="mx-auto w-1/2 flex flex-col space-y-6" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+    <p-messages></p-messages>
+
+    <span class="w-full">
+      <input class="w-full rounded-md border px-1 py-2" id="username" placeholder="username" #username [ngClass]="getClass(username)" type="text" pInputText
+             formControlName="username">
+    </span>
+
+    <span class="w-full mx-auto">
+      <input class="w-full rounded-md border px-1 py-2" id="firstname" placeholder="firstname" #firstname [ngClass]="getClass(firstname)" type="text" pInputText
+           formControlName="firstname">
+    </span>
+
+    <span class="w-full mx-auto">
+      <input class="w-full rounded-md border px-1 py-2" id="lastname" placeholder="lastname" #lastname [ngClass]="getClass(lastname)" type="text" pInputText
+             formControlName="lastname">
+    </span>
+
+    <span class="w-full mx-auto">
+      <select class="w-full rounded-md border px-1 py-2 w-16" id="genre" #genre [ngClass]="getClass(genre)" formControlName="genre">
+        <option value="">--Please choose an option--</option>
+        <option value="M">M</option>
+        <option value="F">F</option>
+      </select>
+    </span>
+
+    <span class="w-full mx-auto">
+      <i class="pi pi-phone mr-2"></i>
+      <input class="w-full rounded-md border px-1 py-2" id="phone" placeholder="phone" #phone [ngClass]="getClass(phone)" type="text" pInputText
+             formControlName="phone">
+    </span>
+
+    <span class="w-full mx-auto">
+      <i class="pi pi-envelope mr-2"></i>
+      <input class="w-full rounded-md border px-1 py-2" id="email" placeholder="email" #email [ngClass]="getClass(email)" type="email" pInputText
+             formControlName="email">
+    </span>
+
+    <button class="mx-auto w-full rounded-md py-2 px-5 bg-transparent text-green-400 outline-green-400  outline-1 outline-offset-1 outline hover:bg-transparent ">Modifier</button>
+
+  </form>
+
+</section>

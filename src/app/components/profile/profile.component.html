@@ -1,1 +1,42 @@
-<p>profile works!</p>
+<section class="card w-screen h-screen overflow-hidden">
+  <p-splitter styleClass="h-screen" [panelSizes]="[25,75]" layout="horizontal">
+    <ng-template pTemplate>
+      <div class="w-full flex flex-col overflow-y-auto space-y-5 py-5 px-3">
+        <img src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Round&hairColor=Red&facialHairType=BeardMedium&facialHairColor=BrownDark&clotheType=GraphicShirt&clotheColor=Heather&graphicType=Skull&eyeType=Squint&eyebrowType=UpDown&mouthType=Disbelief&skinColor=Yellow" alt="Image" width="250" class="border-2 rounded-full mx-auto "/>
+
+        <div class="flex flex-col mx-auto space-y-2">
+          <span><i class="pi pi-user mr-2"></i>{{currentUser.name!}}</span>
+          <span><i class="pi pi-envelope mr-2"></i>{{currentUser.email!}}</span>
+
+          <button  class="transition duration-700 ease-in-out rounded-md py-1 px-1 text-center  bg-indigo-400 text-white outline-indigo-400  outline-1 outline-offset-1 hover:outline hover:bg-transparent hover:text-indigo-500" (click)="onShowEditForm()">Edit profile</button>
+
+          <button  class="transition duration-700 ease-in-out rounded-md py-1 px-1 text-center  bg-red-400 text-white outline-red-400  outline-1 outline-offset-1 hover:outline hover:bg-transparent hover:text-red-500" (click)="onLogOut()">Logout</button>
+        </div>
+
+      </div>
+    </ng-template>
+    <ng-template pTemplate>
+      <div class="flex flex-col w-full">
+        <p-tabView [scrollable]="true">
+          <p-tabPanel header="Mes informations personnelles" leftIcon="pi pi-user" tooltip="Moi">
+            <app-edit-profile></app-edit-profile>
+          </p-tabPanel>
+          <p-tabPanel header="Cours" rightIcon="pi pi-inbox" tooltip="Mes cours">
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
+              rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+              architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+              odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+              voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+          </p-tabPanel>
+          <p-tabPanel header="Ecole" leftIcon="pi pi-briefcase" rightIcon="pi pi-star-fill" tooltip="Mes écoles">
+            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+              atque corrupti quos dolores et quas molestias excepturi sint occaecati
+              cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et
+              dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+              Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </ng-template>
+  </p-splitter>
+</section>

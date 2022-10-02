@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {AuthService} from "../../services/auth.service";
+import {Store} from "@ngrx/store";
+import {login, setLogin} from "../../store/actions/login-page.actions";
+import {setProfile} from "../../store/actions/profile-page.actions";
 
 @Component({
   selector: 'app-login',
@@ -12,19 +15,20 @@ import {AuthService} from "../../services/auth.service";
 export class LoginComponent implements OnInit {
 
   loginForm: any;
-  hide : boolean = true;
+  hide: boolean = true;
   isChecked: boolean = false;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    public messageService:MessageService,
-    private authService:AuthService
+    public messageService: MessageService,
+    private authService: AuthService,
+    private store: Store
   ) {
-    this.loginForm=this.formBuilder.group({
-      email: new FormControl('',[Validators.email,Validators.required]),
-      password: new FormControl('',Validators.required),
-      remember:new FormControl(this.isChecked)
+    this.loginForm = this.formBuilder.group({
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', Validators.required),
+      remember: new FormControl(this.isChecked)
 
     })
   }
@@ -33,38 +37,74 @@ export class LoginComponent implements OnInit {
   }
 
 
-  goToHome() {
-    if (!this.loginForm.valid){
-      this.messageService.add({severity:'info', summary:'formulaire invalide', detail:`entrez votre email et mot de passe`});
-      this.getClass(true)
-      return
+  onSubmit() {
+    if (!this.loginForm.valid) {
+      this.messageService.add({
+        severity: 'info',
+        summary: 'formulaire invalide',
+        detail: `entrez votre email et mot de passe`
+      });
+      this.getClass(true);
+      return;
     }
+    const loginData = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    }
+    this.authService.signIn(loginData).subscribe({
+        next:(res:any)=>{
 
-    this.messageService.add({severity:'success', summary:'Connexion reussie', detail:`Bienvenu(e) ${this.loginForm.value.email}`});
-    setTimeout(()=>{
-      this.router.navigate(['']).then(r=>{})
-    },2500)
+          localStorage.setItem('access_token', res.data.access_token);
+
+          this.store.dispatch(setLogin(loginData));
+
+          this.authService.getUserProfile(res.data.user.id).subscribe((res) => {
+
+            this.messageService.add({
+              severity: 'success',
+              summary: 'connection success',
+              detail: `Welcome ${this.loginForm.value.email}`
+            });
+
+            this.authService.currentUser = res.data;
+
+            this.store.dispatch(setProfile(res.data));
+
+            localStorage.setItem('user', JSON.stringify({user:res.data}));
+
+            setTimeout(()=>{
+              this.router.navigate([`profile/${res.data.slug}`]).then(r=>{})
+            },1500);
+
+          });
+        },
+        error:err => console.error(err)
+      })
+
+
 
   }
 
-  get formControlName(){
+  get formControlName() {
     return this.loginForm.controls;
   }
 
-  get email(){
+  get email() {
     return this.loginForm!.get("email")
   }
-  get password(){
+
+  get password() {
     return this.loginForm!.get("password")!
   }
-  get remember(){
+
+  get remember() {
     return this.loginForm!.get("remember")!
   }
 
-  getClass(event:any) {
-    let attribute ={};
-    if (event){
-      attribute={"ng-invalid ng-dirty":true};
+  getClass(event: any) {
+    let attribute = {};
+    if (event) {
+      attribute = {"ng-invalid ng-dirty": true};
     }
     return attribute;
   }
@@ -78,8 +118,8 @@ export class LoginComponent implements OnInit {
       this.loginForm.setValue(
         {
           email: '',
-          password:this.loginForm.value.password,
-          remember:this.loginForm.value.remember
+          password: this.loginForm.value.password,
+          remember: this.loginForm.value.remember
         }
       )
   }

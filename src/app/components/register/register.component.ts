@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
+import {setLogin} from "../../store/actions/login-page.actions";
+import {Store} from "@ngrx/store";
+import {setProfile} from "../../store/actions/profile-page.actions";
 
 @Component({
   selector: 'app-register',
@@ -16,7 +20,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder:FormBuilder,
     private messageService:MessageService,
-    private router: Router
+    private authService:AuthService,
+    private router: Router,
+    private store:Store
   ) {
     this.registerForm = this.formBuilder.group({
       name:new FormControl('',[Validators.required]),
@@ -29,8 +35,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goToHome() {
-    console.log(this.registerForm)
+  onSubmit() {
     if (!this.registerForm.valid){
       this.messageService.add({severity:'info', summary:'formulaire invalide', detail:`verifiez tous vos champs`});
       return;
@@ -41,10 +46,41 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    // this.messageService.add({severity:'success', summary:'Inscription reussie', detail:`Bienvenu(e) ${this.registerForm.value.email}`});
-    // setTimeout(()=>{
-    //   this.router.navigate(['']).then(r=>{})
-    // },2500)
+    const data = {
+      name:this.registerForm.value.name,
+      email:this.registerForm.value.email,
+      password:this.registerForm.value.confirmPassword,
+    }
+
+    this.authService.signUp(data).subscribe({
+      next:res => {
+
+        localStorage.setItem('access_token', res.data.access_token);
+
+        this.store.dispatch(setLogin({email:data.email,password:data.password}));
+
+        this.authService.getUserProfile(res.data.user.id).subscribe((res) => {
+          this.messageService.add({severity:'success', summary:'Register success', detail:`Welcome ${res.data.name}`});
+
+          this.authService.currentUser = res.data;
+
+          this.store.dispatch(setProfile(res.data));
+
+          localStorage.setItem('user', JSON.stringify({user:res.data}));
+
+          setTimeout(()=>{
+            this.router.navigate([`profile/${res.data.slug}`]).then(r=>{})
+          },1500);
+
+        });
+
+      },
+      error:err =>{
+        console.error(err)
+        this.messageService.add({severity:'error', summary:'Register failed', detail:`Welcome ${this.registerForm.value.email}`});
+      }
+
+    })
 
   }
 

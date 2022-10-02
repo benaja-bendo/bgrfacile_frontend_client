@@ -5,6 +5,7 @@ import {MessageService} from "primeng/api";
 import {AuthService} from "../../services/auth.service";
 import {Store} from "@ngrx/store";
 import {login, setLogin} from "../../store/actions/login-page.actions";
+import {setProfile} from "../../store/actions/profile-page.actions";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     public messageService: MessageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', [Validators.email, Validators.required]),
@@ -46,16 +48,39 @@ export class LoginComponent implements OnInit {
       return;
     }
     const loginData = {
-      username: this.loginForm.value.email,
+      email: this.loginForm.value.email,
       password: this.loginForm.value.password
     }
-    this.authService.signIn(loginData)
+    this.authService.signIn(loginData).subscribe({
+        next:(res:any)=>{
 
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Connexion reussie',
-      detail: `Bienvenu(e) ${this.loginForm.value.email}`
-    });
+          localStorage.setItem('access_token', res.data.access_token);
+
+          this.store.dispatch(setLogin(loginData));
+
+          this.authService.getUserProfile(res.data.user.id).subscribe((res) => {
+
+            this.messageService.add({
+              severity: 'success',
+              summary: 'connection success',
+              detail: `Welcome ${this.loginForm.value.email}`
+            });
+
+            this.authService.currentUser = res.data;
+
+            this.store.dispatch(setProfile(res.data));
+
+            localStorage.setItem('user', JSON.stringify({user:res.data}));
+
+            setTimeout(()=>{
+              this.router.navigate([`profile/${res.data.slug}`]).then(r=>{})
+            },1500);
+
+          });
+        },
+        error:err => console.error(err)
+      })
+
 
 
   }

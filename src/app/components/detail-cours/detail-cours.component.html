@@ -1,0 +1,50 @@
+<section class="card w-screen h-screen overflow-hidden">
+  <p-splitter styleClass="h-full" [panelSizes]="[25,75]" layout="horizontal">
+    <ng-template pTemplate>
+      <div class="w-full h-full flex flex-col overflow-y-auto space-y-5 py-5 px-3" *ngIf="course">
+        <div class="flex items-center space-x-2 cursor-pointer" (click)="onGoBack()">
+          <i class="pi pi-arrow-left font-bold rounded-md bg-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2"></i>
+          <span class="text-center">Go back</span>
+        </div>
+
+        <p class="text-2xl">{{course.name}}</p>
+
+        <img [src]="course.path_image" alt="{{course.name}}" class="w-full h-1/4"/>
+
+        <div class="flex flex-col mx-auto space-y-2">
+
+          <div *ngIf="course.cycles!.length>0">
+            <span>Cycle</span>
+            <div>
+              <p-tag value="{{cylce.name}}" *ngFor="let cylce of course.cycles"></p-tag>
+            </div>
+          </div>
+
+          <div *ngIf="course.levels!.length>0">
+            <span>Niveau</span>
+            <div>
+              <p-tag value="{{level.name}}" *ngFor="let level of course.levels"></p-tag>
+            </div>
+          </div>
+
+          <div *ngIf="course.matieres!.length>0">
+            <span>Matiere</span>
+            <div>
+              <p-tag value="{{matiere.name}}" *ngFor="let matiere of course.matieres"></p-tag>
+            </div>
+          </div>
+
+          <div *ngIf="course.description">
+            <span>Description</span>
+            <p>{{course.description}}</p>
+          </div>
+        </div>
+
+      </div>
+    </ng-template>
+    <ng-template pTemplate>
+      <div class="flex flex-col w-full">
+      </div>
+    </ng-template>
+  </p-splitter>
+</section>

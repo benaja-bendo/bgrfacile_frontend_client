@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {User} from "../models/course";
 import {catchError, map, Observable, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
-import {setLogin} from "../store/actions/login-page.actions";
+import {User} from "../models/user";
 import {Store} from "@ngrx/store";
 
 @Injectable({
@@ -13,12 +12,12 @@ import {Store} from "@ngrx/store";
 export class AuthService {
   endpoint: string = environment.api_gateway.baseRoot_v1;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
+  currentUser! :User ;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private store: Store) {}
+    private store:Store) {}
 
 
   signUp(user: any): Observable<any> {
@@ -26,24 +25,10 @@ export class AuthService {
     return this.http.post(api, user).pipe(catchError(this.handleError));
   }
 
-  signIn(user: any) {
-    return this.http
-      .post<any>(`${this.endpoint}/login`, user)
-      .subscribe((res: any) => {
-        console.log(res);
-        localStorage.setItem('access_token', res.token);
-        localStorage.setItem('user', JSON.stringify({"remember":false}));
-
-        const emailWithOutDomain = (user.username).substring(0, user.username.indexOf("@"))
-
-        this.store.dispatch(setLogin(user));
-
-        this.getUserProfile(res._id).subscribe((res) => {
-          this.currentUser = res;
-          this.router.navigate([`profile/${emailWithOutDomain}`]).then(r => {});
-        });
-      });
+  signIn(user: any):Observable<any> {
+    return this.http.post<any>(`${this.endpoint}/login`, user)
   }
+
   getToken() {
     return localStorage.getItem('access_token');
   }
@@ -53,6 +38,13 @@ export class AuthService {
     return JSON.parse(user)
   }
 
+  getCurrentUser():User{
+    if (this.isLoggedIn){
+      return  this.getUserStorage().user as User
+    }
+    return {}
+  }
+
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
     return authToken !== null ? true : false;
@@ -60,13 +52,14 @@ export class AuthService {
 
   doLogout() {
     let removeToken = localStorage.removeItem('access_token');
-    if (removeToken == null) {
-      this.router.navigate(['login']);
+    let removeUser = localStorage.removeItem('user');
+    if (removeToken == null && removeUser == null) {
+      this.router.navigate(['login']).then(r => {});
     }
   }
   // User profile
   getUserProfile(id: any): Observable<any> {
-    let api = `${this.endpoint}/user-profile/${id}`;
+    let api = `${this.endpoint}/users/${id}`;
     return this.http.get(api, { headers: this.headers }).pipe(
       map((res) => {
         return res || {};

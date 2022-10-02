@@ -37,6 +37,19 @@ import { StoreModule } from '@ngrx/store';
 import {loginReducer} from "./store/reducers/login.reducer";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { LogOutComponent } from './components/log-out/log-out.component';
+import {profileReducer} from "./store/reducers/profile.reducer";
+import { DetailCoursComponent } from './components/detail-cours/detail-cours.component';
+import { CoursesComponent } from './components/courses/courses.component';
+import {BreadcrumbModule} from "primeng/breadcrumb";
+import {TagModule} from "primeng/tag";
+import {PanelMenuModule} from "primeng/panelmenu";
+import {TreeModule} from "primeng/tree";
+import {RadioButtonModule} from "primeng/radiobutton";
+import { CardEcoleComponent } from './components-models/card-ecole/card-ecole.component';
+import { SchoolComponent } from './components/school/school.component';
+import { DetailSchoolComponent } from './components/detail-school/detail-school.component';
+import { SchoolBaseComponent } from './components/school-base/school-base.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +62,14 @@ import { environment } from '../environments/environment';
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    LogOutComponent,
+    DetailCoursComponent,
+    CoursesComponent,
+    CardEcoleComponent,
+    SchoolComponent,
+    DetailSchoolComponent,
+    SchoolBaseComponent
   ],
   imports: [
     BrowserModule,
@@ -74,8 +94,13 @@ import { environment } from '../environments/environment';
     DropdownModule,
     AvatarModule,
     TieredMenuModule,
-    StoreModule.forRoot({login:loginReducer}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreModule.forRoot({login: loginReducer, profile: profileReducer}, {}),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+    BreadcrumbModule,
+    TagModule,
+    PanelMenuModule,
+    TreeModule,
+    RadioButtonModule,
   ],
   providers: [
     {

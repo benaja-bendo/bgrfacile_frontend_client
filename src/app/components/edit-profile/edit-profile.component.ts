@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
+import {AuthService} from "../../services/auth.service";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,17 +13,21 @@ export class EditProfileComponent implements OnInit {
   editForm:any
   hide: boolean = true;
 
+  currentUser : User;
+
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService:AuthService
   ) {
+    this.currentUser = authService.getCurrentUser();
+
     this.editForm = formBuilder.group({
-      username:new FormControl('styveLioumba',[Validators.required]),
-      firstname:new FormControl('styve',[Validators.required]),
-      lastname:new FormControl('Lioumba',[Validators.required]),
-      genre:new FormControl('M',[Validators.required,Validators.maxLength(1)]),
-      phone:new FormControl('0766498664',[Validators.required]),
-      address:new FormControl('3 rue chantecrit 33300 bordeaux',[Validators.required]),
-      email:new FormControl('styvelioumba@gmail.com',[Validators.required,Validators.email])
+      username:new FormControl(this.currentUser.name,[Validators.required]),
+      firstname:new FormControl(this.currentUser.first_name,[Validators.required]),
+      lastname:new FormControl(this.currentUser.last_name,[Validators.required]),
+      genre:new FormControl(this.currentUser.genre,[Validators.required,Validators.maxLength(1)]),
+      phone:new FormControl(this.currentUser.phone,[Validators.required]),
+      email:new FormControl(this.currentUser.email,[Validators.required,Validators.email])
     })
   }
 
@@ -53,9 +59,6 @@ export class EditProfileComponent implements OnInit {
       case "phone":
         attribute={"ng-invalid ng-dirty":(this.phone.touched && this.phone.invalid)};
         break;
-      case "address":
-        attribute={"ng-invalid ng-dirty":(this.address.touched && this.address.invalid)};
-        break;
       case "email":
         attribute={"ng-invalid ng-dirty":(this.email.touched && this.email.invalid)};
         break;
@@ -81,9 +84,6 @@ export class EditProfileComponent implements OnInit {
   }
   get phone(){
     return this.editForm!.get("phone")
-  }
-  get address(){
-    return this.editForm!.get("address")
   }
   get email(){
     return this.editForm!.get("email")

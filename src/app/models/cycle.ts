@@ -1,23 +1,19 @@
 export interface Cycle {
-  id: number
-  name: string
-  slug: string
-  diplome: any
-  isActif: string
-  levels: Level[]
+  id?: number
+  name?: string
+  slug?: string
+  levels?: Level[]
 }
 
 export interface Level {
-  id: number
-  name: string
-  slug: string
-  isActif: string
-  matieres: Matiere[]
+  id?: number
+  name?: string
+  slug?: string
+  matieres?: Matiere[]
 }
 
 export interface Matiere {
-  id: number
-  name: string
-  slug: string
-  isActif: string
+  id?: number
+  name?: string
+  slug?: string
 }

@@ -5,17 +5,19 @@
         <img src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Round&hairColor=Red&facialHairType=BeardMedium&facialHairColor=BrownDark&clotheType=GraphicShirt&clotheColor=Heather&graphicType=Skull&eyeType=Squint&eyebrowType=UpDown&mouthType=Disbelief&skinColor=Yellow" alt="Image" width="250" class="border-2 rounded-full mx-auto "/>
 
         <div class="flex flex-col mx-auto space-y-2">
-          <span><i class="pi pi-user mr-2"></i>Styve LIOUMBA</span>
-          <span><i class="pi pi-envelope mr-2"></i>styvelioumba98@gmail.com</span>
+          <span><i class="pi pi-user mr-2"></i>{{currentUser.name!}}</span>
+          <span><i class="pi pi-envelope mr-2"></i>{{currentUser.email!}}</span>
 
           <button  class="transition duration-700 ease-in-out rounded-md py-1 px-1 text-center  bg-indigo-400 text-white outline-indigo-400  outline-1 outline-offset-1 hover:outline hover:bg-transparent hover:text-indigo-500" (click)="onShowEditForm()">Edit profile</button>
+
+          <button  class="transition duration-700 ease-in-out rounded-md py-1 px-1 text-center  bg-red-400 text-white outline-red-400  outline-1 outline-offset-1 hover:outline hover:bg-transparent hover:text-red-500" (click)="onLogOut()">Logout</button>
         </div>
 
       </div>
     </ng-template>
     <ng-template pTemplate>
       <div class="flex flex-col w-full">
-        <p-tabView>
+        <p-tabView [scrollable]="true">
           <p-tabPanel header="Mes informations personnelles" leftIcon="pi pi-user" tooltip="Moi">
             <app-edit-profile></app-edit-profile>
           </p-tabPanel>

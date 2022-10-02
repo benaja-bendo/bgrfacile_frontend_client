@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
-import {Course} from "../models/course";
+import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -14,7 +13,7 @@ export class CourseService {
     private httpClient: HttpClient
   ) { }
 
-  get courses():Observable<Array<Course>>{
-    return this.httpClient.get<Array<Course>>(this.baseRoot)
+  getCourses():Observable<any>{
+    return this.httpClient.get<any>(this.baseRoot)
   }
 }
